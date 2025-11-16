@@ -1,92 +1,119 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Twitter, Linkedin, Mail, ChevronDown } from 'lucide-react';
+import SpeakerModal from './SpeakerModal';
+import './SpeakersSection.css';
 
-const speakers = [
+interface Speaker {
+  name: string;
+  title: string;
+  img: string;
+  social: { twitter: string; linkedin: string; mail: string };
+  bio: string;
+}
+
+const speakers: Speaker[] = [
   {
     name: 'Andy Walker',
     title: 'Speaker',
     img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop',
     social: { twitter: '#', linkedin: '#', mail: '#' },
+    bio: 'Andy Walker is a seasoned entrepreneur and tech visionary with over 20 years of experience in the software industry. He is passionate about building scalable solutions that solve real-world problems. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
     name: 'Diana Green',
     title: 'Speaker',
     img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop',
     social: { twitter: '#', linkedin: '#', mail: '#' },
+    bio: 'Diana Green is a leading expert in digital marketing and brand strategy. Her innovative campaigns have helped numerous Fortune 500 companies achieve unprecedented growth. Sed ut perspiciatis unde omnis iste natus error sit voluptatem.'
   },
   {
     name: 'Nathan Jones',
     title: 'Speaker',
     img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop',
     social: { twitter: '#', linkedin: '#', mail: '#' },
+    bio: 'Nathan Jones specializes in financial technology and blockchain. He is a frequent speaker at international conferences, sharing his insights on the future of finance. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.'
   },
   {
     name: 'Natalie Carter',
     title: 'Speaker',
     img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop',
     social: { twitter: '#', linkedin: '#', mail: '#' },
+    bio: 'Natalie Carter is a user experience design leader known for her human-centered approach. She believes that great design can change the world for the better. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil.'
   },
   {
-    name: 'Bobby Reeve',
+    name: 'Anna Smith',
     title: 'Speaker',
     img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop',
     social: { twitter: '#', linkedin: '#', mail: '#' },
+    bio: 'Dr. Anna Smith is a research scientist in the field of Artificial Intelligence. Her work focuses on machine learning models and their applications in healthcare. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.'
   },
   {
     name: 'David Matthews',
     title: 'Speaker',
     img: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1887&auto=format&fit=crop',
     social: { twitter: '#', linkedin: '#', mail: '#' },
+    bio: 'David Matthews is a venture capitalist who has funded some of the most successful startups of the last decade. He enjoys mentoring young entrepreneurs. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe.'
   },
   {
     name: 'Linda Grant',
     title: 'Speaker',
     img: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1727&auto=format&fit=crop',
     social: { twitter: '#', linkedin: '#', mail: '#' },
+    bio: 'Linda Grant is an author and journalist covering technology and culture. Her articles have been featured in major publications worldwide. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus.'
   },
   {
     name: 'Nick Lewis',
     title: 'Speaker',
     img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop',
     social: { twitter: '#', linkedin: '#', mail: '#' },
+    bio: 'Nick Lewis is a cybersecurity expert who helps organizations protect their digital assets. He is a strong advocate for online privacy and security. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.'
   },
 ];
 
 const SpeakersSection: React.FC = () => {
+  const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
+
   return (
-    <section className="bg-gray-100 text-black py-20 px-4 md:px-8">
-      <div className="container mx-auto">
-        <div className="text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold">Speakers</h2>
-          <ChevronDown className="h-8 w-8 mx-auto mt-4 text-orange-500 animate-bounce" />
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
-          {speakers.map((speaker, index) => (
-            <div key={index} className="group text-center">
-              <div className="relative overflow-hidden rounded-lg shadow-lg">
-                <img src={speaker.img} alt={speaker.name} className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-black/70 flex justify-center items-center gap-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-                  <a href={speaker.social.twitter} aria-label={`${speaker.name}'s Twitter`} className="text-white hover:text-orange-400 transition-colors p-2">
-                    <Twitter className="h-6 w-6" />
-                  </a>
-                  <a href={speaker.social.linkedin} aria-label={`${speaker.name}'s LinkedIn`} className="text-white hover:text-orange-400 transition-colors p-2">
-                    <Linkedin className="h-6 w-6" />
-                  </a>
-                  <a href={`mailto:${speaker.social.mail}`} aria-label={`Email ${speaker.name}`} className="text-white hover:text-orange-400 transition-colors p-2">
-                    <Mail className="h-6 w-6" />
-                  </a>
+    <>
+      <section className="speakers-section">
+        <div className="speakers-container">
+          <div className="speakers-header">
+            <h2 className="speakers-title">Speakers</h2>
+            <ChevronDown className="title-icon" />
+          </div>
+          <div className="speakers-grid">
+            {speakers.map((speaker, index) => (
+              <div key={index} className="speaker-card">
+                <div className="speaker-image-wrapper">
+                  <img src={speaker.img} alt={speaker.name} className="speaker-image" />
+                  <div className="social-overlay">
+                    <div className="social-links-container">
+                      <a href={speaker.social.twitter} aria-label={`${speaker.name}'s Twitter`} className="social-link">
+                        <Twitter className="icon" />
+                      </a>
+                      <a href={speaker.social.linkedin} aria-label={`${speaker.name}'s LinkedIn`} className="social-link">
+                        <Linkedin className="icon" />
+                      </a>
+                      <a href={`mailto:${speaker.social.mail}`} aria-label={`Email ${speaker.name}`} className="social-link">
+                        <Mail className="icon" />
+                      </a>
+                    </div>
+                    <button className="read-bio-btn" onClick={() => setSelectedSpeaker(speaker)}>
+                        Read Bio
+                    </button>
+                  </div>
+                </div>
+                <div className="speaker-info">
+                  <h4 className="speaker-name">{speaker.name}</h4>
+                  <p className="speaker-title">{speaker.title}</p>
                 </div>
               </div>
-              <div className="mt-4">
-                <h4 className="font-bold text-xl">{speaker.name}</h4>
-                <p className="text-gray-600">{speaker.title}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <SpeakerModal speaker={selectedSpeaker} onClose={() => setSelectedSpeaker(null)} />
+    </>
   );
 };
 
