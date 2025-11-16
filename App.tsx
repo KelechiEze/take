@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Preloader from './components/Preloader';
 import HeroSection from './components/HeroSection';
+import AboutSection from './components/AboutSection';
 import HashtagScroller from './components/HashtagScroller';
+import GallerySection from './components/GallerySection';
 import VirtualEventsSection from './components/VirtualEventsSection';
 import Countdown from "./components/Countdown";
 import FutureSection from './components/FutureSection';
@@ -36,7 +38,9 @@ const App: React.FC = () => {
           <HeroSection />
           <HashtagScroller />
           <Countdown />
+          <AboutSection />
           <VirtualEventsSection />
+          <GallerySection />
           <SpeakersSection />
           <FutureSection />
           <TestimonialsSection />
