@@ -6,6 +6,7 @@ import HashtagScroller from './components/HashtagScroller';
 import GallerySection from './components/GallerySection';
 import VirtualEventsSection from './components/VirtualEventsSection';
 import Countdown from "./components/Countdown";
+import ContactSection from './components/ContactSection';
 import FutureSection from './components/FutureSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import SpeakersSection from './components/SpeakersSection';
@@ -44,6 +45,7 @@ const App: React.FC = () => {
           <SpeakersSection />
           <FutureSection />
           <TestimonialsSection />
+          <ContactSection />
           <FAQSection />
           <PromoSection />
           <Footer />
